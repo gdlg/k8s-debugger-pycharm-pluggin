@@ -1,0 +1,31 @@
+<idea-plugin>
+    <id>info.com.hochet.k8sDebugger</id>
+    <name>Kubernetes Python Debugger</name>
+    <vendor email="kubernetes-plugin@hochet.info" url="http://github.com/gdlg">Gregoire Payen de La Garanderie</vendor>
+
+    <description>Experimental plugin to attach the Python debugger to a running process in Kubernetes deployments</description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.python</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType implementation="com.hochet.k8sDebugger.K8sDebuggerRunConfigurationType" />
+        <remote.credentialsType implementation="com.hochet.k8sDebugger.sdk.K8sCredentialsType"/>
+        <remote.credentialsLanguageContribution implementation="com.hochet.k8sDebugger.sdk.K8sCredentialsPythonContribution"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="Pythonid">
+        <pyAddSdkProvider implementation="com.hochet.k8sDebugger.sdk.PyAddK8sSdkProvider"/>
+        <packageManagerProvider implementation="com.hochet.k8sDebugger.sdk.PyK8sPackageManagerProvider"/>
+        <remoteSkeletonGeneratorFactory implementation="com.hochet.k8sDebugger.sdk.PyK8sRemoteSkeletonGeneratorFactory"/>
+        <remoteProcessStarterManager implementation="com.hochet.k8sDebugger.sdk.PyK8sRemoteProcessStarterManager"/>
+        <debugSessionFactory implementation="com.hochet.k8sDebugger.PyK8sDebugSessionFactory"/>
+    </extensions>
+
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
